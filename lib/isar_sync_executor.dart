@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:benchapp/executor.dart';
-import 'package:benchapp/isar.g.dart';
 import 'package:benchapp/model.dart';
 import 'package:benchapp/time_tracker.dart';
 import 'package:isar/isar.dart';
@@ -20,8 +19,8 @@ class Executor<T extends TestEntity> extends ExecutorBase<T> {
   }
 
   // TODO isar v0.4.0 - crashes with a SEGFAULT (at least in Android emulator)
-  // Future<void> close() async => await _store.close();
-  Future<void> close() => Future.value();
+  Future<void> close() async => await _store.close();
+//  Future<void> close() => Future.value();
 
   Future<void> insertMany(List<T> items) => Future.value(
         tracker.track(

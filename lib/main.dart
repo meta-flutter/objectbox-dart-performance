@@ -8,7 +8,7 @@ import 'package:path_provider/path_provider.dart';
 
 import 'executor.dart';
 import 'hive_executor.dart' as hive;
-import 'isar_sync_executor.dart' as isar_sync;
+//import 'isar_sync_executor.dart' as isar_sync;
 import 'model.dart';
 import 'obx_executor.dart' as obx;
 import 'sqf_executor.dart' as sqf;
@@ -66,7 +66,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-enum DbEngine { ObjectBox, sqflite, Hive, IsarSync }
+enum DbEngine { ObjectBox, sqflite, Hive } //, IsarSync
 
 enum Mode { CRUD, Queries, QueryById }
 
@@ -128,8 +128,8 @@ class _MyHomePageState extends State<MyHomePage> {
             Directory(path.join(dbDir.path, 'bench.db')), _tracker);
       case DbEngine.Hive:
         return hive.Executor.create<T>(dbDir, _tracker);
-      case DbEngine.IsarSync:
-        return isar_sync.Executor.create<T>(dbDir, _tracker);
+//      case DbEngine.IsarSync:
+//        return isar_sync.Executor.create<T>(dbDir, _tracker);
       // case 4:
       //   return hive_lazy.Executor.create<T>(dbDir, _tracker);
       // case 5:
@@ -433,7 +433,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   //      benchmarks in the same loop.
                   items: enumDropDownItems(Mode.values
                       .where((mode) =>
-                          _db != DbEngine.IsarSync ||
+//                          _db != DbEngine.IsarSync ||
                           (mode != Mode.Queries && mode != Mode.QueryById))
                       .toList()),
                   onChanged: (Mode? value) => configure(_db, value!, _indexed)),
